@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+  	http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-autowire="byName">
+
+	<!-- Dao -->
+	<bean id="configDao" class="socns.persist.dao.impl.ConfigDaoImpl" />
+	<bean id="userDao" class="socns.persist.dao.impl.UserDaoImpl" />
+	<bean id="logDao"  class="socns.persist.dao.impl.LogDaoImpl" />
+	<bean id="commentDao" class="socns.persist.dao.impl.CommentDaoImpl" />
+	<bean id="postDao" class="socns.persist.dao.impl.PostDaoImpl" />
+	<bean id="attachDao" class="socns.persist.dao.impl.AttachDaoImpl" />
+	<bean id="tagDao" class="socns.persist.dao.impl.TagDaoImpl" />
+	<bean id="stUserDao" class="socns.persist.dao.impl.STUserDaoImpl" />
+	
+	<!-- Service -->
+	<bean id="configService" class="socns.persist.service.impl.ConfigServiceImpl" />
+	<bean id="userService" class="socns.persist.service.impl.UserServiceImpl" />
+	<bean id="logService" class="socns.persist.service.impl.LogServiceImpl" />
+	<bean id="commentService" class="socns.persist.service.impl.CommentServiceImpl" />
+	<bean id="postService" class="socns.persist.service.impl.PostServiceImpl" />
+	<bean id="attachService" class="socns.persist.service.impl.AttachServiceImpl" />
+	<bean id="tagService" class="socns.persist.service.impl.TagServiceImpl" />
+	
+</beans>
