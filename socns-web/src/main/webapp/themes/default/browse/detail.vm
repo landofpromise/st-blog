@@ -11,7 +11,7 @@
 			<span class="pull-left author">
 				<a class="author-name" href="$base/user/${ret.author.id}" target="_blank">#showName(${ret.author})</a>
 			</span>
-			<time class="pull-left time">$date.format('yyyy-MM-dd', $ret.created)</time>
+			<time class="pull-left time">$date.format('yyyy-MM-dd HH:mm', $ret.created)</time>
 			<ul class="pull-left list-inline tag-box">
 				<li>$!{ret.tags}</li>
 			</ul>
@@ -74,7 +74,9 @@
 <script type="text/plain" id="chat">
 <li class="left clearfix" id="aw_char_{4}">
 	<span class="chat-img pull-left">
+		<a href="$base/user/{5}">
 		<img src="$base{0}" class="img-circle" style="width: 50px; height: 50px;">
+		</a>
 	</span>
 	<div class="chat-body clearfix">
 		<div class="header">
@@ -93,7 +95,9 @@
    <ul>
 	<li class="left clearfix">
 	<span class="chat-img pull-left">
-		<img src="$base{0}" class="img-circle" style="width: 50px; height: 50px;">
+		<a href="$base/user/{4}">
+			<img src="$base{0}" class="img-circle" style="width: 50px; height: 50px;">
+		</a>
 	</span>
 	<div class="chat-body clearfix">
 		<div class="header">
@@ -134,9 +138,9 @@ $(function(){
 		onLoad : function (i, data) {
 		var item ="";
         	if(data.toPid!=0){
-        	item = jQuery.format(awtemplate, data.author.avatar, data.author.name, data.created, data.content);
+        	item = jQuery.format(awtemplate, data.author.avatar, data.author.name, data.created, data.content, data.author.id);
         	 }else{
-        	 item = jQuery.format(template, data.author.avatar, data.author.name, data.created, data.content,data.id);
+        	 item = jQuery.format(template, data.author.avatar, data.author.name, data.created, data.content,data.id, data.author.id);
         	 }
       		return item;
         }

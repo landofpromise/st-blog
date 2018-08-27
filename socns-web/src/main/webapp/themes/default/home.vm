@@ -48,7 +48,7 @@
 			        <div class="excerpt wordbreak hidden-xs">$!{row.summary} &nbsp;</div>
 			    	<div class="foot-block clearfix">
                         <div class="author">
-                            <time>$date.format('yyyy-MM-dd', $row.created)</time>
+                            <time>$date.format('yyyy-MM-dd HH:mm', $row.created)</time>
                         </div>
 						<ul class="tags">
 			    			#foreach($tag in $row.tagsArray)

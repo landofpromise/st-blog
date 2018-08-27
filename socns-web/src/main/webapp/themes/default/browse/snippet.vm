@@ -1,27 +1,142 @@
-#set($layout="default/layout/noop.vm")
+#set($title="走廊")
 
-#foreach($row in $page.results)
-<div class="shadow-box g-item span_1_of_3 col masonry-entry">
-	#if($row.type == 'image' && ${row.snapshot.preview})
-	<div class="g-thumb">
-		<a href="$base/browse/detail/${row.id}">
-			<img src="$base${row.snapshot.preview}">
-		</a>
-	</div>
-	#end
-	<h3 class="title">
-		<a href="$base/browse/detail/${row.id}">${row.title}</a>
-	</h3>
-	<div class="g-outline">
-		<p>${row.summary}</p>
-	</div>
-	
-	<div class="g-btm">
-		<div class="pull-left">
-			<span class="author">#showName(${row.author})</span>
-			<time class="time">$date.format('yyyy-MM-dd', $row.created)</time>
+<script type="text/javascript" src="$base/dist/js/app/galley_comment.js"></script>
+
+<script type="text/javascript">
+		$(window).load(function() {
+            var path = window.location.href;
+			var cur_page = path.substring(path.lastIndexOf("/") + 1);
+			var next_page = parseInt(cur_page) + 1;
+			var previous_page = 1;
+			if(cur_page > 1)
+				previous_page = cur_page - 1;
+			var item = document.getElementById("next_page");
+			var previous_item = document.getElementById("previous_page");
+			item.href = item.href.replace("next_page_index", next_page);
+			previous_item.href = previous_item.href.replace("previous_page_index", previous_page);
+        });
+		
+</script>
+
+<div class="col-xs-12 col-md-12">
+    <div id="blog-wrap" class="g-box masonry-grid">
+    	#foreach($row in $page.results)
+    	<div class="shadow-box g-item span_1_of_3 col masonry-entry" id="top_panel_${row.id}">
+    		#if($row.type == 'image' && ${row.snapshot.preview})
+        	<div class="g-thumb">
+        		<a href="$base/browse/detail/${row.id}">
+    				<img src="$base${row.snapshot.preview}">
+    			</a>
+        	</div>
+    		#end
+        	<h3 class="title">
+        		<a href="$base/browse/detail/${row.id}">${row.title}</a>
+        	</h3>
+        	<div class="g-outline">
+        		<p>${row.summary}</p>
+        	</div>
+        	
+        	<div class="g-btm">
+        		<div class="pull-left">
+        			<span class="author"><a href="$base/user/${row.author.id}">#showName(${row.author})</a></span>
+        			<time class="time">$date.format('yyyy-MM-dd HH:mm', $row.created)</time>
+        		</div>
+    			<a class="cmt pull-right" href="javascript:void(0)" onclick="onHeart(this, '${row.id}')">喜欢&nbsp;(<i>${row.hearts}</i>)</a>
+        	</div>
+		<div class="panel panel-default">
+		<div class="panel-body">
+			<ul class="chat" id="chat_container_${row.id}"><li><p></p></li></ul>
+			<div id="pager_${row.id}" class="text-center"></div>
 		</div>
-		<a class="cmt pull-right" href="javascript:void(0)" onclick="onHeart(this, '${row.id}')">喜欢&nbsp;(<i>${row.hearts}</i>)</a>
+		<div class="panel-footer">
+			<div class="input-group">
+				<input id="chat_text_${row.id}" type="text" class="form-control input-sm" placeholder="在这写点什么吧...">
+				<input type="hidden" value="0" id="chat_pid_${row.id}" /> 
+				<span class="input-group-btn">
+					<button class="btn btn-warning btn-sm" id="btn-chat_${row.id}">发送</button>
+				</span>
+			</div>
+		</div>
+		
+		<script type="text/plain" id="chat_${row.id}">
+		<li class="left clearfix" id="aw_char_${row.id}_{4}">
+			<a href="$base/user/{5}"><font color="blue">{1}</font></a>：{3}
+		</li>
+		</script>
+
+		<script type="text/plain" id="aw_chat_${row.id}">
+		<li  class="left clearfix">
+		   <a href="$base/user/{4}"><font color="blue">{1}</font></a>：{3}
+		</li>
+		</ul>
+		</li>
+		</script>
+		
+		<script type="text/javascript">
+
+		function goto(pid){
+		document.getElementById('chat_text_${row.id}').scrollIntoView();
+		$('#chat_text_${row.id}').focus();
+		$('#chat_text_${row.id}').val('');
+		$('#btn-chat_${row.id}').text("回复");
+		$('#chat_pid_${row.id}').val(pid);
+		}
+		var container = $("#chat_container_${row.id}");
+		var template = $('#chat_${row.id}')[0].text;
+		var awtemplate = $('#aw_chat_${row.id}')[0].text;
+
+
+		$(function(){	
+			var comment = new Comment($("#chat_container_${row.id}"), {
+				load_url : '$base/comment/list/${row.id}.json',
+				post_url : '$base/comment/submit.json',
+				toId : '${row.id}',
+				onLoad : function (i, data) {
+				var item ="";
+				if(data.toPid!=0){
+				item = jQuery.format(awtemplate, data.author.avatar, data.author.name, data.created, data.content, data.author.id);
+				 }else{
+				 item = jQuery.format(template, data.author.avatar, data.author.name, data.created, data.content,data.id, data.author.id);
+				 }
+				return item;
+			}
+			}, ${row.id});
+
+		});
+		</script>
 	</div>
+        </div>
+    	#end
+    </div>
+    <!-- #blog-wrap -->
+    <div style="text-align:center;font-size:1.1em;font-weight:bold">
+    	<a style="position:absolute;z-index:10000;right:160px;" href="$base/browse/gallery_snippet/1"><font color="#ec971f">首  页</font>
+    	<a id="previous_page" style="position:absolute;z-index:10000;right:100px;" 
+    		href="$base/browse/gallery_snippet/previous_page_index"><font color="#ec971f">上一页</font></a>
+		<a id="next_page" style="position:absolute;z-index:10000;right:40px;" 			
+    		href="$base/browse/gallery_snippet/next_page_index"><font color="#ec971f">下一页</font></a>
+    </div>
 </div>
-#end
+
+<script type="text/javascript">
+
+function onHeart(event, id) {
+	var that = $(event);
+	if (parseInt(id) > 0) {
+		jQuery.getJSON('$base/post/heart', {'id': id}, function (ret) {
+			if (ret.code >=0) {
+				var sideLiked = that.find('i').text();
+				that.find('i').text(parseInt(sideLiked) + 1);
+			}
+		});
+	}
+}
+
+$(function(){
+	$("img").lazyload({
+		 placeholder : "$base/dist/images/spinner.gif",
+		 effect      : "fadeIn"
+	});
+});
+</script>
+

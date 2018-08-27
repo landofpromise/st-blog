@@ -10,6 +10,8 @@
     				<span class="icon-bar"></span>
     			</button>
     			<a class="navbar-brand logo" href="$base/index"><img src="$base/dist/images/logo/m216.png"></a>
+    			<a href="$base/browse/gallery" style="float: left;color:white;padding-top:15px;"><i class="fa fa-columns fa-lg"></i> 走廊</a>
+    			<a href="$base/post/new/image" style="float: left;color:white;padding-left:15px;padding-top:15px;"><i class="fa fa-camera"></i>写日志</a>
     		</div>
     		<div id="navbar" class="navbar-collapse collapse">
     			<ul class="nav navbar-nav">
@@ -23,9 +25,6 @@
     					<a href="$base/explore"><i class="fa fa-tags fa-lg"></i> 发现</a>
     				</li>
     				-->
-    				<li>
-    					<a href="$base/browse/gallery"><i class="fa fa-columns fa-lg"></i> 走廊</a>
-    				</li>
     			</ul>
     			<div class="search-box navbar-left hidden-xs">
     				<form class="navbar-form" method="get" action="$base/browse/search">
