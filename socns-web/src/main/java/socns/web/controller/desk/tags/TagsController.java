@@ -36,7 +36,7 @@ public class TagsController extends BaseController {
 	@Autowired
 	private TagService tagService;
 	
-	private int maxResults = 12;
+	private int maxResults = 50;
 	
 	@RequestMapping("/explore")
 	public String view(ModelMap model) {

@@ -30,9 +30,7 @@
 			<div class="navbar-header">
 				<button id="main_nav_btn" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
+					<i class="far fa-cog"></i>
 				</button>
 				<a class="navbar-brand logo" href="http://www.landofpromise.co"><img src="$base/dist/images/logo/m216.png"></a>
 			</div>

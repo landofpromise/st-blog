@@ -33,6 +33,7 @@ public class IndexController extends BaseController{
 		if (StringUtils.isNotBlank(ord)) {
 			order = ord;
 		}
+		page.setMaxResults(50);
 		page = postPlanet.paging(page, order);
 		model.put("page", page);
 		model.put("ord", order);

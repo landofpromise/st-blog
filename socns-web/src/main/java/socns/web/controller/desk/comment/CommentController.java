@@ -37,6 +37,8 @@ public class CommentController extends BaseController {
 	public @ResponseBody Paging view(Integer pn, @PathVariable Long toId) {
 		Paging page = wrapPage(pn);
 		commentService.paging(page, toId);
+		int totalCount = page.getResults().size();
+		page.setTotalCount(totalCount);
 		return page;
 	}
 	

@@ -33,7 +33,7 @@ $(function () {
     	hotUrl : '$base/browse/hots_json',
 		hotTagUrl : '$base/browse/hot_tags_json',
 		
-    	maxResults :10,
+    	maxResults :50,
         // callback
         onLoadHot : function (i, data) {
         	var url = '$base/browse/detail/' + data.id;

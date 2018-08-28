@@ -26,7 +26,7 @@ public class GalleryController extends BaseController {
 	@Autowired
 	private PostPlanet postPlanet;
 	
-	private int jsonMaxResults = 8;
+	private int jsonMaxResults = 50;
 	
 	@RequestMapping("/gallery")
 	public String view(Integer pn, ModelMap model) {
